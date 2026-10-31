@@ -28,7 +28,7 @@ if(DEFINED ENV{SKYRIM_MODS_FOLDER} AND IS_DIRECTORY "$ENV{SKYRIM_MODS_FOLDER}")
 endif()
 
 # Otherwise, you can set OUTPUT_FOLDER to any place you'd like :)
-set(OUTPUT_FOLDER "I:/SME/mods/Read It Now")
+# (author's hard-coded I:/SME path removed; set SKYRIM_MODS_FOLDER instead)
 
 # Setup your SKSE plugin as an SKSE plugin!
 find_package(CommonLibSSE CONFIG REQUIRED)
@@ -41,6 +41,10 @@ set_property(
         $<$<NOT:$<C_COMPILER_ID:MSVC>>:-UENABLE_SKYRIM_VR>
 )
 target_compile_features(${PROJECT_NAME} PRIVATE cxx_std_23) # <--- use C++23 standard
+
+# Dear ImGui for the read-while-walking mini page (includes/MiniPage.cpp)
+find_package(imgui CONFIG REQUIRED)
+target_link_libraries(${PROJECT_NAME} PRIVATE imgui::imgui d3d11 dxgi d3dcompiler dwmapi)
 target_precompile_headers(${PROJECT_NAME} PRIVATE PCH.h) # <--- PCH.h is required!
 
 # When your SKSE .dll is compiled, this will automatically copy the .dll into your mods folder.

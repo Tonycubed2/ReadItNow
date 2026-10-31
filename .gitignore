@@ -4,3 +4,11 @@
 build
 cmake-build*
 SkyPrompt*
+
+# working data and packaged releases (not source)
+vbos_json/
+vbos_json_cpu/
+vbos_audio/
+vbos_audio_narr/
+release/
+_to_delete/
